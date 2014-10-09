@@ -1,5 +1,6 @@
 koars-utils
 ===========
+[![Build Status](https://img.shields.io/travis/koars/utils.svg?style=flat)](https://travis-ci.org/koars/utils)
 
 This package provides several utility functions for the koars framework and its dependencies.
 Run tests via `npm test`.
