@@ -1,6 +1,6 @@
 {
   "name": "koars-utils",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Utility functions for koars",
   "main": "index.js",
   "repository": {
@@ -25,7 +25,7 @@
     "bunyan"
   ],
   "author": "Florian Albertz",
-  "license": "BSD-3",
+  "license": "BSD-3-Clause",
   "jshintConfig": {
     "node": true,
     "mocha": true
