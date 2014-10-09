@@ -18,7 +18,7 @@
     "must": "^0.12.0"
   },
   "scripts": {
-    "test": "mocha --require must && jshint --reporter node_modules/jshint-stylish/stylish.js"
+    "test": "mocha --require must && jshint . --exclude-path .gitignore --reporter node_modules/jshint-stylish/stylish.js"
   },
   "keywords": [
     "koars",
