@@ -1,5 +1,6 @@
 var logger;
 var bunyan = require('bunyan');
+var cfg = require('koars-config');
 var es = require('event-stream');
 
 function name() {
@@ -12,6 +13,10 @@ function port() {
 
 function basepath() {
 	return process.env.BASEPATH || '';
+}
+
+function config() {
+	return process.env.CONFIG || 'config';
 }
 
 function dev() {
@@ -35,6 +40,7 @@ module.exports = function(logOptions) {
 
 	//Return all the function and if neccessary a child logger
 	return {
+		config: cfg(config()),
 		name: name,
 		port: port,
 		basepath: basepath,

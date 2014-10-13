@@ -35,3 +35,6 @@ Assigned a [bunyan](https://github.com/trentm/node-bunyan) logger. This is eithe
 	logger.child(logOptions);
 
 If `utils.test()` returns true, all loggers will dump their output.
+
+### utils.config
+An instance of [koars-config](https://github.com/koars/config) instantiated to the directory passed in the `CONFIG` environment variable (defaults to `config`).

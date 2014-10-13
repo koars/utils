@@ -1,4 +1,8 @@
-var util = require('../index.js');
+var rewire = require('rewire');
+var sinon = require('sinon');
+var util = rewire('../index.js');
+var config = sinon.stub().returns('config');
+util.__set__('cfg', config);
 
 //Reset the environment before each test is run
 beforeEach(function() {
@@ -8,8 +12,10 @@ beforeEach(function() {
 	delete process.env.NODE_ENV;
 });
 
+
+
 describe('The name() function', function() {
-	koars = util();
+	var koars = util();
 
 	it('provides a name if set', function() {
 		var name = 'Some Name';
@@ -23,7 +29,7 @@ describe('The name() function', function() {
 });
 
 describe('The port() function', function() {
-	koars = util();
+	var koars = util();
 
 	it('provides a port if set', function() {
 		process.env.PORT = '2000';
@@ -36,7 +42,7 @@ describe('The port() function', function() {
 });
 
 describe('The basepath() function', function() {
-	koars = util();
+	var koars = util();
 
 	it('provides a path if set', function() {
 		var path = 'SomePath';
@@ -50,7 +56,7 @@ describe('The basepath() function', function() {
 });
 
 describe('The dev() function', function() {
-	koars = util();
+	var koars = util();
 
 	it('returns "false" if NODE_ENV is set to "production"', function() {
 		process.env.NODE_ENV = 'production';
@@ -97,5 +103,21 @@ describe('If required with log options', function() {
 		koars.log.fields.name.must.be(util().log.fields.name);
 		koars.log.fields.hostname.must.be(util().log.fields.hostname);
 		koars.log.fields.pid.must.be(util().log.fields.pid);
+	});
+});
+
+describe('Assigns a correct config instance', function() {
+	it('by default', function() {
+		var koars = util();
+		koars.config.must.be('config');
+		config.calledWith('config').must.be.true();
+	});
+
+	it('after a config directoy is set', function() {
+		process.env.CONFIG = 'otherconfig';
+
+		var koars = util();
+		koars.config.must.be('config');
+		config.calledWith('otherconfig').must.be.true();
 	});
 });
