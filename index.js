@@ -1,7 +1,8 @@
 var logger;
 var bunyan = require('bunyan');
-var cfg = require('koars-config');
+var cfg = require('koars-config')();
 var es = require('event-stream');
+var defaults = require('koars-defaults');
 
 function name() {
 	return process.env.NAME || 'koars';
@@ -38,9 +39,12 @@ module.exports = function(logOptions) {
 		});
 	}
 
+	var targetConf = cfg(config());
+	defaults(targetConf);
+
 	//Return all the function and if neccessary a child logger
 	return {
-		config: cfg(config()),
+		config: targetConf,
 		name: name,
 		port: port,
 		basepath: basepath,

@@ -1,8 +1,14 @@
 var rewire = require('rewire');
 var sinon = require('sinon');
 var util = rewire('../index.js');
-var config = sinon.stub().returns('config');
+var defaults = sinon.spy();
+var configs = {
+	defaults: function() {}
+};
+var config = sinon.stub().returns(configs);
+
 util.__set__('cfg', config);
+util.__set__('defaults', defaults);
 
 //Reset the environment before each test is run
 beforeEach(function() {
@@ -62,7 +68,7 @@ describe('The dev() function', function() {
 		process.env.NODE_ENV = 'production';
 		koars.dev().must.be(false);
 	});
-	
+
 	it('returns "true" if NODE_ENV is not set', function() {
 		koars.dev().must.be(true);
 	});
@@ -109,7 +115,7 @@ describe('If required with log options', function() {
 describe('Assigns a correct config instance', function() {
 	it('by default', function() {
 		var koars = util();
-		koars.config.must.be('config');
+		koars.config.must.be(configs);
 		config.calledWith('config').must.be.true();
 	});
 
@@ -117,7 +123,12 @@ describe('Assigns a correct config instance', function() {
 		process.env.CONFIG = 'otherconfig';
 
 		var koars = util();
-		koars.config.must.be('config');
+		koars.config.must.be(configs);
 		config.calledWith('otherconfig').must.be.true();
+	});
+
+	it('and adds defaults', function() {
+		var koars = util();
+		defaults.calledWith(configs).must.be.true();
 	});
 });

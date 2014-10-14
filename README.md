@@ -3,7 +3,6 @@ koars-utils
 [![Build Status](https://img.shields.io/travis/koars/utils.svg?style=flat)](https://travis-ci.org/koars/utils)
 
 This package provides several utility functions for the koars framework and its dependencies.
-Run tests via `npm test`.
 
 Setup
 -----
@@ -38,3 +37,4 @@ If `utils.test()` returns true, all loggers will dump their output.
 
 ### utils.config
 An instance of [koars-config](https://github.com/koars/config) instantiated to the directory passed in the `CONFIG` environment variable (defaults to `config`).
+This is also run through [koars-defaults](https://github.com/koars/defaults) to assign sane defaults for our application.
