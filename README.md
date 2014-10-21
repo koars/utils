@@ -38,3 +38,6 @@ If `utils.test()` returns true, all loggers will dump their output.
 ### utils.config
 An instance of [koars-config](https://github.com/koars/config) instantiated to the directory passed in the `CONFIG` environment variable (defaults to `config`).
 This is also run through [koars-defaults](https://github.com/koars/defaults) to assign sane defaults for our application.
+
+### utils.hbs
+An instance of [handlebars](https://github.com/wycats/handlebars), to prevent requiring different versions from different submodules.

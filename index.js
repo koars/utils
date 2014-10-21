@@ -3,6 +3,7 @@ var bunyan = require('bunyan');
 var cfg = require('koars-config')();
 var es = require('event-stream');
 var defaults = require('koars-defaults');
+var hbs = require('handlebars');
 
 function name() {
 	return process.env.NAME || 'koars';
@@ -50,6 +51,7 @@ module.exports = function(logOptions) {
 		basepath: basepath,
 		dev: dev,
 		test: test,
-		log: logOptions ? logger.child(logOptions) : logger
+		log: logOptions ? logger.child(logOptions) : logger,
+		hbs: hbs
 	};
 };
